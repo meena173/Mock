@@ -1,70 +1,63 @@
 package com.example.demo;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
-public class Bank 
-{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	private Long id;
-	
-	private String accountnumber;
-	private String bankname;
-	
-	@OneToOne
-	@JoinColumn(name="people_id")
-	
-	private People people;
-	
-	
+@Entity
+public class Bank {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bankId;
 
-	public Bank(Long id, String accountnumber, String bankname, People people) {
+    private String bankName;
+    private String phoneNumber;
+
+    @OneToOne(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PeopleBank peopleBank;
+
+	public Bank(Long bankId, String bankName, String phoneNumber, PeopleBank peopleBank) {
 		super();
-		this.id = id;
-		this.accountnumber = accountnumber;
-		this.bankname = bankname;
-		this.people = people;
+		this.bankId = bankId;
+		this.bankName = bankName;
+		this.phoneNumber = phoneNumber;
+		this.peopleBank = peopleBank;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getBankId() {
+		return bankId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setBankId(Long bankId) {
+		this.bankId = bankId;
 	}
 
-	public String getAccountnumber() {
-		return accountnumber;
+	public String getBankName() {
+		return bankName;
 	}
 
-	public void setAccountnumber(String accountnumber) {
-		this.accountnumber = accountnumber;
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
-	public String getBankname() {
-		return bankname;
+	public String getPhoneNumber1() {
+		return phoneNumber;
 	}
 
-	public void setBankname(String bankname) {
-		this.bankname = bankname;
+	public void setPhoneNumber(Object object) {
+		this.phoneNumber = (String) object;
 	}
 
-	public People getPeople() {
-		return people;
+	public PeopleBank getPeopleBank() {
+		return peopleBank;
 	}
 
-	public void setPeople(People people) {
-		this.people = people;
+	public void setPeopleBank(PeopleBank peopleBank) {
+		this.peopleBank = peopleBank;
 	}
-	
-	
-	
-	
 
+	public Object getPhoneNumber() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+   
 }

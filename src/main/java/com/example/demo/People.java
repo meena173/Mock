@@ -1,53 +1,69 @@
 package com.example.demo;
+import java.sql.Date;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="people")
-public class People 
-{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	@OneToOne(mappedBy="people",cascade=CascadeType.All)
-	
-	private Bank bank;
-	private String First_name;
-	public People(Long id, String first_name, String last_name, String birth_date) {
+public class People {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long personId;
+
+    private String firstName;
+    private String lastName;
+    private Date birthDate;
+
+    @OneToOne(mappedBy = "people", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PeopleBank peopleBank;
+
+	public People(Long personId, String firstName, String lastName, Date birthDate, PeopleBank peopleBank) {
 		super();
-		this.id = id;
-		First_name = first_name;
-		Last_name = last_name;
-		Birth_date = birth_date;
+		this.personId = personId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.peopleBank = peopleBank;
 	}
-	private String Last_name;
-	private String Birth_date;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getFirst_name() {
-		return First_name;
-	}
-	public void setFirst_name(String first_name) {
-		First_name = first_name;
-	}
-	public String getLast_name() {
-		return Last_name;
-	}
-	public void setLast_name(String last_name) {
-		Last_name = last_name;
-	}
-	public String getBirth_date() {
-		return Birth_date;
-	}
-	public void setBirth_date(String birth_date) {
-		Birth_date = birth_date;
-	}
-	
-	
 
+	public Long getPersonId() {
+		return personId;
+	}
 
+	public void setPersonId(Long personId) {
+		this.personId = personId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public PeopleBank getPeopleBank() {
+		return peopleBank;
+	}
+
+	public void setPeopleBank(PeopleBank peopleBank) {
+		this.peopleBank = peopleBank;
+	}
+
+    
 }
